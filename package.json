@@ -1,0 +1,53 @@
+{
+    "name": "@ionaru/create-linting",
+    "version": "0.0.0",
+    "description": "My package create-linting",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "files": [
+        "dist/**/*"
+    ],
+    "scripts": {
+        "clean": "npx -q rimraf dist",
+        "build": "npm run clean && tsc --project tsconfig.json",
+        "lint": "npm run lint:src && npm run lint:test",
+        "lint:src": "eslint --ext ts --max-warnings 0 --ignore-pattern *.spec.ts src",
+        "lint:test": "eslint --ext ts --plugin jest --env jest/globals src/**/*.spec.ts",
+        "pretest": "npm run lint",
+        "test": "jest src",
+        "prepare": "npm run build",
+        "preversion": "npm run test"
+    },
+    "jest": {
+        "collectCoverage": true,
+        "collectCoverageFrom": [
+            "src/**/*.ts",
+            "!src/**/*.d.ts",
+            "!src/**/*.spec.ts",
+            "!src/__mocks__/*.ts"
+        ],
+        "preset": "ts-jest",
+        "testEnvironment": "node"
+    },
+    "keywords": [],
+    "author": "Jeroen Akkerman",
+    "repository": "github:Ionaru/create-linting",
+    "license": "MIT",
+    "devDependencies": {},
+    "dependencies": {
+        "@ionaru/eslint-config": "^1.0.4",
+        "@types/jest": "^26.0.4",
+        "@types/node": "^14.0.20",
+        "@typescript-eslint/eslint-plugin": "^3.6.0",
+        "@typescript-eslint/eslint-plugin-tslint": "^3.6.0",
+        "eslint": "^7.4.0",
+        "eslint-plugin-import": "^2.22.0",
+        "eslint-plugin-jest": "^23.18.0",
+        "eslint-plugin-no-null": "^1.0.2",
+        "eslint-plugin-prefer-arrow": "^1.2.1",
+        "eslint-plugin-sonarjs": "^0.5.0",
+        "jest": "^26.1.0",
+        "ts-jest": "^26.1.1",
+        "typescript": "^3.9.6"
+    }
+}
