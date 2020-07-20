@@ -1,9 +1,9 @@
 # @ionaru/create-linting
 
 ## Description
-A package for...
+A package that will add my personal preferred linting setup to a project.
 
 ## Usage
 ```
-npm install @ionaru/create-linting
+npm init @ionaru/linting
 ```
