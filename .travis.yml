@@ -3,3 +3,31 @@ node_js:
     - '14' # EOL: April 2023
     - '12' # EOL: April 2022
     - '10' # EOL: April 2021
+
+jobs:
+    include:
+        - stage: deploy
+          node_js: "lts/*"
+          script: skip
+          before_deploy: if [ "$TRAVIS_BRANCH" = master ] && [ "$TRAVIS_PULL_REQUEST" = false ]; then npm version prerelease --no-git-tag-version --preid "$TRAVIS_BUILD_NUMBER"; fi
+          deploy:
+              - provider: npm
+                edge: true
+                email: info@saturnserver.org
+                api_token: $NPM_TOKEN
+                tag: next
+                on:
+                    branch: master
+                    repo: Ionaru/eve-utils
+              - provider: npm
+                edge: true
+                email: info@saturnserver.org
+                api_token: $NPM_TOKEN
+                on:
+                    branch: master
+                    repo: Ionaru/eve-utils
+                    tags: true
+
+env:
+    global:
+        secure: x+l/05HKIFzGig4AeoaH+6F6ux1IWgtvq2DtjzABEnQQD7sw6y5/oRfPp6G0ISF1jUU4JQ1DY2URRsViQ5A0+Pygzknqqi0+fEfaOipzNE5ZZzXXiejDqomh3vxe9aPdIXEcexXE21L9m2sBdcryKbgIyNt1nNPFtkz7juWscmT27b3V9SxelCk700W3iYIhsiPlvktbz1GCI5ymsmRF+qsgOLoGCQISQ/2GGUQZLd5J0Oq+OjdJND2QlLzfK9ZYxA4XPqStbcqkf3qb/K6J9Hm1HCxAs+ZJ0tyuJReS0YNu6Rw/CoA+9L4ZqxaaXOh/LaGV9BM87u5L93x97khSZwNMEOcklYn+2IPQsgLGD4gT9K98za5Vij0iN+o0FisVJ003wJJeyfsNP9yXfl+8+yWrk+bIyb60zvX+9dtLgIqmKsMOiEVPdkhzPbWyzdUL/zv9LtORfhPQogMw6tOpHGn+bqZa7u8h4g0/epocwCvU+tltVQLoYsEW5azZr442XPHPpdBicHk/xe/sVynvhGzVEA3R9JjWW1W6lsbmkklxCMaMtN1QnvDK087D5BjK7Y71OPMdppYSRgt7y9xS9DwEvcM3Fu0loL8yB1u6DhuGBdnb3HwMzXHGeNhve5dRzetXK4qWSp4EFgOsCo54VJUHr7DF04xJPwV/L8sjyqg=
