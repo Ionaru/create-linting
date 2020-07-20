@@ -1,6 +1,6 @@
 {
     "name": "@ionaru/create-linting",
-    "version": "0.0.0",
+    "version": "1.0.0",
     "description": "My package create-linting",
     "bin": "dist/cli.js",
     "main": "dist/index.js",
