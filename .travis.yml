@@ -18,14 +18,14 @@ jobs:
                 tag: next
                 on:
                     branch: master
-                    repo: Ionaru/eve-utils
+                    repo: Ionaru/create-linting
               - provider: npm
                 edge: true
                 email: info@saturnserver.org
                 api_token: $NPM_TOKEN
                 on:
                     branch: master
-                    repo: Ionaru/eve-utils
+                    repo: Ionaru/create-linting
                     tags: true
 
 env:
